@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application_1/Login.dart';
+// import 'package:flutter_application_1/Login.dart';
+import 'package:flutter_application_1/Login_ui.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key, required this.title}) : super(key: key);
@@ -70,7 +71,7 @@ class _SignupState extends State<Signup> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Login(),
+                    builder: (context) => const Login_ui(),
                   ),
                 );
               },

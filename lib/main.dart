@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter_application_1/Default.dart';
 import 'package:flutter_application_1/Home_real.dart';
-
+import 'package:flutter_application_1/Landing.dart';
 import 'Signup.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,7 +9,9 @@ import 'package:firebase_core/firebase_core.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,16 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Signup(title: 'HII');
-          } else {
-            return const Homereal(title: 'HII');
-          }
-        },
-      ),
+      home: const Landing(),
     );
   }
 }
