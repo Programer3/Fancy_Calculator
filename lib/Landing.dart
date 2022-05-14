@@ -1,18 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'Main_button.dart';
+import 'package:flutter_application_1/Textfields.dart';
+import 'package:flutter_application_1/auth_Buttons.dart';
 import 'package:flutter_application_1/constants.dart';
-import 'package:animated_button/animated_button.dart';
+import 'Login_ui.dart';
 
-class Landing extends StatelessWidget {
+class Landing extends StatefulWidget {
   const Landing({Key? key}) : super(key: key);
+
+  @override
+  State<Landing> createState() => _LandingState();
+}
+
+class _LandingState extends State<Landing> {
+  late final TextEditingController _email = TextEditingController();
+  late final TextEditingController _password = TextEditingController();
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  void useandclear() {
+    _email.clear();
+    _password.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
-        maintainBottomViewPadding: true,
+        // maintainBottomViewPadding: true,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Center(
@@ -47,41 +70,62 @@ class Landing extends StatelessWidget {
                 SizedBox(
                   height: size.height / 22,
                 ),
-                Image.asset(
-                  'assets/images/025.png',
-                  height: size.height / 2.3,
+                Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/images/025.png',
+                      height: size.height / 2.3,
+                    ),
+                    Textfields(
+                      email: _email,
+                      password: _password,
+                    ),
+                  ],
                 ),
                 SizedBox(height: size.height / 21),
                 Wrap(
                   runSpacing: 20,
                   alignment: WrapAlignment.center,
                   children: <Widget>[
-                    AnimatedButton(
-                      width: 300,
-                      height: 55,
-                      color: kPrimaryColor,
-                      onPressed: () {},
-                      child: const Text(
-                        'Register',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
+                    Hero(
+                      tag: 'register',
+                      child: AuthButton(
+                          aonPressed: () async {
+                            if (_email.text.isEmpty || _password.text.isEmpty) {
+                              return;
+                            } else {
+                              try {
+                                await FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
+                                        email: _email.text,
+                                        password: _password.text);
+                                useandclear();
+                              } catch (e) {
+                                print(e.toString());
+                              }
+                            }
+                          },
+                          asaytext: 'Register',
+                          awidth: 300,
+                          aheight: 55,
+                          acolor: kPrimaryColor),
                     ),
-                    AnimatedButton(
-                      width: 250,
-                      height: 50,
-                      color: kTextColor,
-                      onPressed: () {},
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                    Hero(
+                      tag: 'login',
+                      child: AuthButton(
+                        acolor: kTextColor,
+                        aheight: 50,
+                        aonPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Login_ui(),
+                            ),
+                          );
+                        },
+                        asaytext: 'Login',
+                        awidth: 250,
                       ),
                     ),
                   ],
@@ -94,14 +138,3 @@ class Landing extends StatelessWidget {
     );
   }
 }
-
-// StreamBuilder<User?>(
-//         stream: FirebaseAuth.instance.authStateChanges(),
-//         builder: (context, snapshot) {
-//           if (!snapshot.hasData) {
-//             return const Signup(title: 'HII');
-//           } else {
-//             return const Homereal(title: 'HII');
-//           }
-//         },
-//       ),
