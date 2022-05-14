@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Login_ui.dart';
 
 import 'Landing.dart';
 
@@ -44,16 +45,11 @@ class _HomeState extends State<Home> {
                         setState(() {
                           if (FirebaseAuth.instance.currentUser == null) {
                             setState(() {
-                              StreamBuilder<User?>(
-                                stream:
-                                    FirebaseAuth.instance.authStateChanges(),
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return const Landing();
-                                  } else {
-                                    return Home();
-                                  }
-                                },
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (contex) {
+                                  return Login_ui();
+                                }),
                               );
                             });
                           }

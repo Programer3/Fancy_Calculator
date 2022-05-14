@@ -31,25 +31,25 @@ class _LandingState extends State<Landing> {
   }
 
   // ignore: non_constant_identifier_names
-  bool ActiveConnection = false;
-  String T = "";
-  // ignore: non_constant_identifier_names
-  Future CheckUserConnection() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        setState(() {
-          ActiveConnection = true;
-          T = "Turn off the data and repress again";
-        });
-      }
-    } on SocketException catch (_) {
-      setState(() {
-        ActiveConnection = false;
-        T = "Turn On the data and repress again";
-      });
-    }
-  }
+  // bool ActiveConnection = false;
+  // String T = "";
+  // // ignore: non_constant_identifier_names
+  // Future CheckUserConnection() async {
+  //   try {
+  //     final result = await InternetAddress.lookup('google.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       setState(() {
+  //         ActiveConnection = true;
+  //         T = "Turn off the data and repress again";
+  //       });
+  //     }
+  //   } on SocketException catch (_) {
+  //     setState(() {
+  //       ActiveConnection = false;
+  //       T = "Turn On the data and repress again";
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -118,19 +118,21 @@ class _LandingState extends State<Landing> {
                             if (_email.text.isEmpty || _password.text.isEmpty) {
                               return;
                             } else {
-                              CheckUserConnection();
-                              if (ActiveConnection == true) {
-                                try {
-                                  await FirebaseAuth.instance
-                                      .createUserWithEmailAndPassword(
-                                          email: _email.text,
-                                          password: _password.text);
-                                  useandclear();
-                                } catch (e) {
-                                  print(e.toString());
+                              try {
+                                await FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
+                                        email: _email.text,
+                                        password: _password.text);
+                                useandclear();
+                                print('useandclear');
+                                fshowLoaderDialog(context);
+                                print('showLoaderDialog');
+                                if (FirebaseAuth.instance.currentUser != null) {
+                                  print('circle popped');
+                                  Navigator.pop(context);
                                 }
-                              } else {
-                                print("No Internet");
+                              } catch (e) {
+                                print(e.toString());
                               }
                             }
                           },
@@ -148,10 +150,7 @@ class _LandingState extends State<Landing> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Login_ui(
-                                checknet: CheckUserConnection(),
-                                hasinternet: ActiveConnection,
-                              ),
+                              builder: (context) => const Login_ui(),
                             ),
                           );
                         },

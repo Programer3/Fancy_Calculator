@@ -9,12 +9,7 @@ import 'package:flutter_application_1/constants.dart';
 class Login_ui extends StatefulWidget {
   const Login_ui({
     Key? key,
-    required this.hasinternet,
-    required this.checknet,
   }) : super(key: key);
-
-  final bool hasinternet;
-  final dynamic checknet;
 
   @override
   State<Login_ui> createState() => _Login_uiState();
@@ -58,18 +53,20 @@ class _Login_uiState extends State<Login_ui> {
                     if (_email.text.isEmpty || _password.text.isEmpty) {
                       return;
                     } else {
-                      widget.checknet();
+                      try {
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                            email: _email.text, password: _password.text);
+                        _email.clear();
+                        _password.clear();
 
-                      if (widget.hasinternet == true) {
-                        try {
-                          await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                                  email: _email.text, password: _password.text);
-                          _email.clear();
-                          _password.clear();
-                        } catch (e) {
-                          print(e.toString());
+                        fshowLoaderDialog(context);
+                        print('showLoaderDialog');
+                        if (FirebaseAuth.instance.currentUser != null) {
+                          Navigator.pop(context);
+                          print('circle popped');
                         }
+                      } catch (e) {
+                        print(e.toString());
                       }
                     }
                     setState(() {
