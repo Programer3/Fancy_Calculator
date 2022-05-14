@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Textfields.dart';
@@ -26,6 +28,27 @@ class _LandingState extends State<Landing> {
   void useandclear() {
     _email.clear();
     _password.clear();
+  }
+
+  // ignore: non_constant_identifier_names
+  bool ActiveConnection = false;
+  String T = "";
+  // ignore: non_constant_identifier_names
+  Future CheckUserConnection() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          ActiveConnection = true;
+          T = "Turn off the data and repress again";
+        });
+      }
+    } on SocketException catch (_) {
+      setState(() {
+        ActiveConnection = false;
+        T = "Turn On the data and repress again";
+      });
+    }
   }
 
   @override
@@ -95,14 +118,19 @@ class _LandingState extends State<Landing> {
                             if (_email.text.isEmpty || _password.text.isEmpty) {
                               return;
                             } else {
-                              try {
-                                await FirebaseAuth.instance
-                                    .createUserWithEmailAndPassword(
-                                        email: _email.text,
-                                        password: _password.text);
-                                useandclear();
-                              } catch (e) {
-                                print(e.toString());
+                              CheckUserConnection();
+                              if (ActiveConnection == true) {
+                                try {
+                                  await FirebaseAuth.instance
+                                      .createUserWithEmailAndPassword(
+                                          email: _email.text,
+                                          password: _password.text);
+                                  useandclear();
+                                } catch (e) {
+                                  print(e.toString());
+                                }
+                              } else {
+                                print("No Internet");
                               }
                             }
                           },
@@ -120,7 +148,10 @@ class _LandingState extends State<Landing> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Login_ui(),
+                              builder: (context) => Login_ui(
+                                checknet: CheckUserConnection(),
+                                hasinternet: ActiveConnection,
+                              ),
                             ),
                           );
                         },
