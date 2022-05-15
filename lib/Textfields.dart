@@ -30,6 +30,7 @@ class _TextfieldsState extends State<Textfields> {
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
                 color: kTextColor,
+                width: 2,
               ),
             ),
             contentPadding: const EdgeInsets.all(16.0),
@@ -58,6 +59,7 @@ class _TextfieldsState extends State<Textfields> {
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
                 color: kTextColor,
+                width: 2,
               ),
             ),
             border: OutlineInputBorder(
@@ -77,12 +79,14 @@ class _TextfieldsState extends State<Textfields> {
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
                 color: kTextColor,
+                width: 2,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
                 color: kTextColor,
+                width: 2,
               ),
             ),
             contentPadding: const EdgeInsets.all(16.0),

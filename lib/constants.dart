@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Color(0XFFFF4522);
@@ -26,4 +27,6 @@ fshowLoaderDialog(BuildContext context) {
   );
 }
 
-  //
+//finals
+
+final fireinst = FirebaseAuth.instance;
