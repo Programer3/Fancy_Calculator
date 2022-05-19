@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/Login_ui.dart';
+import 'package:flutter_application_1/Screens/Login.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -40,15 +40,16 @@ class _HomeState extends State<Home> {
       },
       child: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.2, 0.5],
-          colors: [
-            Colors.orange.shade200,
-            Colors.white,
-          ],
-        )),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.2, 0.5],
+            colors: [
+              Colors.orange.shade200,
+              Colors.white,
+            ],
+          ),
+        ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: SafeArea(
@@ -71,7 +72,7 @@ class _HomeState extends State<Home> {
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(builder: (contex) {
-                                      return Login_ui();
+                                      return Login();
                                     }),
                                   );
                                 });

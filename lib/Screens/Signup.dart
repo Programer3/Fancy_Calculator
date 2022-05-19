@@ -1,18 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Textfields.dart';
-import 'package:flutter_application_1/auth_Buttons.dart';
+import 'package:flutter_application_1/Components/Textfields.dart';
+import 'package:flutter_application_1/Components/auth_Buttons.dart';
 import 'package:flutter_application_1/constants.dart';
-import 'Login_ui.dart';
+import '../Components/Textfields.dart';
+import 'Login.dart';
 
-class Landing extends StatefulWidget {
-  const Landing({Key? key}) : super(key: key);
+class Signup extends StatefulWidget {
+  const Signup({Key? key}) : super(key: key);
 
   @override
-  State<Landing> createState() => _LandingState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _LandingState extends State<Landing> {
+class _SignupState extends State<Signup> {
   late final TextEditingController _email = TextEditingController();
   late final TextEditingController _password = TextEditingController();
 
@@ -131,12 +132,7 @@ class _LandingState extends State<Landing> {
                           acolor: kTextColor,
                           aheight: 50,
                           aonPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Login_ui(),
-                              ),
-                            );
+                            Navigator.pop(context);
                           },
                           asaytext: 'Login',
                           awidth: 250,

@@ -1,22 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Home.dart';
-import 'package:flutter_application_1/Textfields.dart';
-import 'package:flutter_application_1/auth_Buttons.dart';
+import 'package:flutter_application_1/Screens/Home.dart';
+import 'package:flutter_application_1/Components/Textfields.dart';
+import 'package:flutter_application_1/Components/auth_Buttons.dart';
+import 'package:flutter_application_1/Screens/Signup.dart';
 import 'package:flutter_application_1/constants.dart';
 
 // ignore: camel_case_types
-class Login_ui extends StatefulWidget {
-  const Login_ui({
+class Login extends StatefulWidget {
+  const Login({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<Login_ui> createState() => _Login_uiState();
+  State<Login> createState() => _LoginState();
 }
 
 // ignore: camel_case_types
-class _Login_uiState extends State<Login_ui> {
+class _LoginState extends State<Login> {
   late final TextEditingController _email = TextEditingController();
   late final TextEditingController _password = TextEditingController();
 
@@ -115,7 +116,12 @@ class _Login_uiState extends State<Login_ui> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Signup(),
+                      ),
+                    );
                   },
                 ),
                 Container(

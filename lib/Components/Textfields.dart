@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class Textfields extends StatefulWidget {
-  Textfields({
+  const Textfields({
     Key? key,
     required this.email,
     required this.password,
   }) : super(key: key);
 
-  late TextEditingController email;
-  late TextEditingController password;
+  final TextEditingController email;
+  final TextEditingController password;
 
   @override
   State<Textfields> createState() => _TextfieldsState();
@@ -60,13 +60,13 @@ class _TextfieldsState extends State<Textfields> {
             ),
             hintText: "Enter your email",
             hintStyle: const TextStyle(
-              color: Color(0xff8d8c8c),
+              color: kTextLightColor,
             ),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30.0),
                 borderSide: BorderSide.none),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: kPrimaryLightColor,
           ),
         ),
         const SizedBox(height: 15.0),
@@ -109,13 +109,13 @@ class _TextfieldsState extends State<Textfields> {
             ),
             hintText: "Enter your password",
             hintStyle: const TextStyle(
-              color: Color(0xff8d8c8c),
+              color: kTextLightColor,
             ),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide.none),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: kPrimaryLightColor,
           ),
         )
       ],
