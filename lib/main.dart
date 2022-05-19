@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application_1/Home.dart';
-import 'package:flutter_application_1/Landing.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/Lottie.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,23 +18,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth fireinst = FirebaseAuth.instance;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: StreamBuilder<User?>(
-        stream: fireinst.authStateChanges(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Landing();
-          } else {
-            return Home();
-          }
-        },
-      ),
+      home: const Lottiepage(),
     );
   }
 }

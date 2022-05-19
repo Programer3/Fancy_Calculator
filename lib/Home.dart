@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
                           setState(() {
                             if (fireinst.currentUser == null) {
                               setState(() {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(builder: (contex) {
                                     return Login_ui();
