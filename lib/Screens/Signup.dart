@@ -4,7 +4,6 @@ import 'package:flutter_application_1/Components/Textfields.dart';
 import 'package:flutter_application_1/Components/auth_Buttons.dart';
 import 'package:flutter_application_1/constants.dart';
 import '../Components/Textfields.dart';
-import 'Login.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -32,6 +31,7 @@ class _SignupState extends State<Signup> {
         Navigator.of(context).pop();
         if (fireinst.currentUser != null) {
           useandclear();
+          Navigator.of(context).pushReplacementNamed('/home');
         }
       } on FirebaseAuthException catch (e) {
         // ignore: avoid_print

@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Screens/Home.dart';
 import 'package:flutter_application_1/Components/Textfields.dart';
 import 'package:flutter_application_1/Components/auth_Buttons.dart';
-import 'package:flutter_application_1/Screens/Signup.dart';
 import 'package:flutter_application_1/constants.dart';
 
 // ignore: camel_case_types
@@ -88,14 +86,7 @@ class _LoginState extends State<Login> {
               child: AuthButton(
                   aonPressed: () async {
                     await signin(_email.text, _password.text);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return Home();
-                        },
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(context, '/home');
                   },
                   asaytext: 'Login',
                   awidth: 250,
@@ -116,12 +107,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Signup(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, '/signup');
                   },
                 ),
                 Container(

@@ -6,8 +6,8 @@ import '/constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
-
+  Splash({Key? key, this.isDark}) : super(key: key);
+  late bool? isDark;
   @override
   State<Splash> createState() => _SplashState();
 }
@@ -25,7 +25,9 @@ class _SplashState extends State<Splash> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Home(),
+            builder: (context) => Home(
+              isDark: widget.isDark,
+            ),
           ),
         );
       } else {

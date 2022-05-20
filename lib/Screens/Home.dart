@@ -1,19 +1,30 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, file_names, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/Screens/Login.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
-
+  Home({
+    Key? key,
+    this.isDark,
+  }) : super(key: key);
+  late bool? isDark;
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  setDarkmode(bool? iSDARK) {
+    widget.isDark = true;
+    print('Changed to Dark mode');
+  }
+
+  setLightmode(bool? iSDARK) {
+    widget.isDark = false;
+    print('Changed to Light mode');
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -60,28 +71,52 @@ class _HomeState extends State<Home> {
                 Container(
                   padding: EdgeInsets.only(left: 5, right: 5),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(onPressed: () {}, icon: Icon(Icons.sunny)),
-                        IconButton(
-                          onPressed: () async {
-                            await fireinst.signOut();
-                            setState(() {
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Tooltip(
+                        message: 'Change Theme',
+                        child: IconButton(
+                            onPressed: () {
+                              setState(
+                                () {
+                                  // widget.isDark = widget.isDark!;
+                                  widget.isDark == false
+                                      ? setDarkmode(widget.isDark)
+                                      : setLightmode(widget.isDark);
+                                },
+                              );
+                              // if (widget.isDark == false) {
+                              //   setState(() {
+                              //     widget.isDark = true;
+                              //   });
+                              // } else {
+                              //   setState(() {
+                              //     widget.isDark = false;
+                              //   });
+                              // }
+                            },
+                            icon: Icon(Icons.sunny)),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await fireinst.signOut();
+                          setState(
+                            () {
                               if (fireinst.currentUser == null) {
-                                setState(() {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (contex) {
-                                      return Login();
-                                    }),
-                                  );
-                                });
+                                setState(
+                                  () {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/login');
+                                  },
+                                );
                               }
-                            });
-                          },
-                          icon: Icon(Icons.logout),
-                        ),
-                      ]),
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.logout),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 25,
@@ -100,11 +135,12 @@ class _HomeState extends State<Home> {
                 Row(
                   children: [
                     Container(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Where today you will work!",
-                          style: TextStyle(fontSize: 15),
-                        )),
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text(
+                        widget.isDark == false ? 'Light Theme ' : 'Dark Theme',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(
