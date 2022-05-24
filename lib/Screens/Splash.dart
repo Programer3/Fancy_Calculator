@@ -1,13 +1,11 @@
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Screens/Login.dart';
-import 'Home.dart';
-import '/constants.dart';
+import '../Global_constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class Splash extends StatefulWidget {
-  Splash({Key? key, this.isDark}) : super(key: key);
-  late bool? isDark;
+  const Splash({
+    Key? key,
+  }) : super(key: key);
   @override
   State<Splash> createState() => _SplashState();
 }
@@ -22,21 +20,9 @@ class _SplashState extends State<Splash> {
   Future navigator() async {
     await Future.delayed(const Duration(milliseconds: 1500), () {
       if (fireinst.currentUser != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Home(
-              isDark: widget.isDark,
-            ),
-          ),
-        );
+        Navigator.pushReplacementNamed(context, '/profile');
       } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Login(),
-          ),
-        );
+        Navigator.pushReplacementNamed(context, '/choose');
       }
     });
     // StreamBuilder<User?>(
@@ -60,15 +46,15 @@ class _SplashState extends State<Splash> {
           Container(
             height: double.infinity,
             decoration: const BoxDecoration(
-              color: Colors.teal,
+              color: kNicecalm,
             ),
           ),
           Center(
             child: TextLiquidFill(
               loadDuration: const Duration(milliseconds: 1200),
               text: 'HII',
-              boxBackgroundColor: Colors.teal,
-              waveColor: Colors.white,
+              boxBackgroundColor: kNicecalm,
+              waveColor: kMintCream,
               waveDuration: const Duration(milliseconds: 400),
             ),
           ),

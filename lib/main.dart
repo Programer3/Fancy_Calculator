@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'Screens/Home.dart';
-import 'Screens/Login.dart';
-import 'Screens/Signup.dart';
+import 'package:flutter_application_1/Screens/Choose_auth.dart';
+import 'package:flutter_application_1/Screens/profile_screen.dart';
+import 'package:get/get.dart';
+import 'Screens/Authentication/Login.dart';
+import 'Screens/Authentication/Signup.dart';
 import 'Screens/Splash.dart';
 
 Future<void> main() async {
@@ -13,7 +14,10 @@ Future<void> main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp();
   runApp(
-    MultiProvider(providers: [], child: const MyApp()),
+    // MultiProvider(
+    //   providers: const [],
+    const MyApp(),
+    // ),
   );
 }
 
@@ -22,25 +26,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = false;
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      themeMode: isDark == true ? ThemeMode.dark : ThemeMode.light,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      themeMode: ThemeMode.dark,
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      // ),
       // home: Splash(
       //   isDark: isDark,
       // ),
       initialRoute: '/',
       routes: {
-        '/': (context) => Splash(
-              isDark: isDark,
-            ),
-        '/home': (context) => Home(),
+        '/': (context) => const Splash(),
         '/login': (context) => const Login(),
         '/signup': (context) => const Signup(),
+        '/profile': (context) => const ProfilePage(),
+        '/choose': (context) => const Chooseauth(),
       },
     );
   }

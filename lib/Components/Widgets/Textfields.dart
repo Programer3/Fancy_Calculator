@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../Global_constants.dart';
 
 class Textfields extends StatefulWidget {
   const Textfields({
@@ -29,14 +30,14 @@ class _TextfieldsState extends State<Textfields> {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
-                color: kTextColor,
+                color: kChestorange,
                 width: 2,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
-                color: kTextColor,
+                color: kChestorange,
                 width: 2,
               ),
             ),
@@ -45,7 +46,7 @@ class _TextfieldsState extends State<Textfields> {
               padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
               margin: const EdgeInsets.only(right: 8.0),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: kOnyx,
                 borderRadius: BorderRadius.only(
                   topLeft: kRadiusthirty,
                   bottomLeft: kRadiusthirty,
@@ -55,18 +56,20 @@ class _TextfieldsState extends State<Textfields> {
               ),
               child: const Icon(
                 Icons.person,
-                color: Color(0xff262726),
+                color: kEmerald,
               ),
             ),
             hintText: "Enter your email",
-            hintStyle: const TextStyle(
-              color: kTextLightColor,
+            hintStyle: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: kOnyx,
+              ),
             ),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30.0),
                 borderSide: BorderSide.none),
             filled: true,
-            fillColor: kPrimaryLightColor,
+            fillColor: kMintCream,
           ),
         ),
         const SizedBox(height: 15.0),
@@ -78,14 +81,14 @@ class _TextfieldsState extends State<Textfields> {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
-                color: kTextColor,
+                color: kChestorange,
                 width: 2,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
-                color: kTextColor,
+                color: kChestorange,
                 width: 2,
               ),
             ),
@@ -94,7 +97,7 @@ class _TextfieldsState extends State<Textfields> {
               padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
               margin: const EdgeInsets.only(right: 8.0),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: kOnyx,
                 borderRadius: BorderRadius.only(
                   topLeft: kRadiusthirty,
                   bottomLeft: kRadiusthirty,
@@ -104,18 +107,20 @@ class _TextfieldsState extends State<Textfields> {
               ),
               child: const Icon(
                 Icons.lock,
-                color: Color(0xff262726),
+                color: kEmerald,
               ),
             ),
             hintText: "Enter your password",
-            hintStyle: const TextStyle(
-              color: kTextLightColor,
+            hintStyle: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: kOnyx,
+              ),
             ),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide.none),
             filled: true,
-            fillColor: kPrimaryLightColor,
+            fillColor: kMintCream,
           ),
         )
       ],
